@@ -1,0 +1,4 @@
+[[plugins]]
+id = "test"
+executable_path = "/home/raphael/Dev/tapyre/backend/examples/simple_python_plugin/main.py"
+plugin_type = "Python"
