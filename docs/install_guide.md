@@ -1,4 +1,4 @@
-# Installation guide
+# Install guide
 
 ## Astal (Wayland)
 
