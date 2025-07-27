@@ -11,7 +11,7 @@ export default function () {
   let searchentry: Gtk.Entry;
   let win: Astal.Window;
 
-  const TAPYRE_CMD = GLib.getenv("TAPYRE_CMD") || "tapyre";
+  const TAPYRE_CMD = GLib.getenv("TAPYRE_CMD") || "tapyre-cli";
 
   const [list, setList] = createState(new Array<string>());
 
