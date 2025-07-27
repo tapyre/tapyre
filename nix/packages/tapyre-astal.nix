@@ -2,12 +2,12 @@
   pkgs,
   ags,
   astal,
-  tapyre-cli,
+  self,
 }:
 pkgs.stdenv.mkDerivation {
   name = "tapyre";
 
-  src = ../..;
+  src = ../../tapyre/astal;
 
   nativeBuildInputs = with pkgs; [
     wrapGAppsHook
@@ -29,7 +29,7 @@ pkgs.stdenv.mkDerivation {
   preFixup = ''
     gappsWrapperArgs+=(
       --prefix PATH : ${pkgs.lib.makeBinPath [
-      tapyre-cli.packages.${pkgs.system}.default
+      self.packages.${pkgs.system}.tapyre-cli
     ]}
     )
   '';
