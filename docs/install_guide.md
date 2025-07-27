@@ -1,6 +1,6 @@
 # Install guide
 
-## Astal (Wayland)
+## tapyre-astal (Frontend for wayland)
 
 ```sh
 nix shell github:tapyre/tapyre#tapyre-astal
