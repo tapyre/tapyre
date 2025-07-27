@@ -4,10 +4,10 @@
   ags,
   self,
 }: {
-  tapyre-cli = pkgs.callPackage ./tapyre-cli.nix {
+  tapyre-cli = pkgs.callPackage ./cli.nix {
     inherit pkgs;
   };
-  tapyre-astal = pkgs.callPackage ./tapyre-astal.nix {
+  tapyre-astal = pkgs.callPackage ./astal.nix {
     inherit pkgs astal ags self;
   };
 }

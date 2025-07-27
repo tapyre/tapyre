@@ -2,9 +2,9 @@
 pkgs.rustPlatform.buildRustPackage {
   name = "tapyre-cli";
 
-  src = ../../tapyre-cli;
+  src = ../../cli;
 
   cargoLock = {
-    lockFile = ../../tapyre-cli/Cargo.lock;
+    lockFile = ../../cli/Cargo.lock;
   };
 }

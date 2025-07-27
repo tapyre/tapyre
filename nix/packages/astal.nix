@@ -7,7 +7,7 @@
 pkgs.stdenv.mkDerivation {
   name = "tapyre";
 
-  src = ../../tapyre/astal;
+  src = ../../astal;
 
   nativeBuildInputs = with pkgs; [
     wrapGAppsHook
