@@ -1,4 +1,5 @@
 <h1 align="center">Tapyre</h1>
+<p align="center"><i>!!! WIP !!!</i></p>
 
 ## Installation
 
