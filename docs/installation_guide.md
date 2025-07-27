@@ -3,13 +3,13 @@
 ## Astal (Wayland)
 
 ```sh
-nix shell "github:tapyre/tapyre?dir=tapyre/astal"
+nix shell github:tapyre/tapyre#tapyre-astal
 ```
 
 
 ## tapyre-cli (Backend)
 
 ```sh
-nix shell "github:tapyre/tapyre?dir=tapyre-cli"
+nix shell github:tapyre/tapyre#tapyre-cli
 ```
 
