@@ -55,39 +55,6 @@
       }
     );
 
-    packages = forAllSystems (
-      pkgs: {
-        default = pkgs.stdenv.mkDerivation {
-          name = "tapyre";
-
-          src = ./.;
-
-          nativeBuildInputs = with pkgs; [
-            wrapGAppsHook
-            gobject-introspection
-            glib
-            gjs
-            ags.packages.${system}.default
-          ];
-
-          buildInputs = with pkgs; [
-            astal.packages.${system}.astal4
-          ];
-
-          installPhase = ''
-            mkdir -p $out/bin
-            ags bundle ./src/app.ts $out/bin/tapyre
-          '';
-
-          preFixup = ''
-            gappsWrapperArgs+=(
-              --prefix PATH : ${pkgs.lib.makeBinPath [
-              tapyre-cli.packages.${pkgs.system}.default
-            ]}
-            )
-          '';
-        };
-      }
-    );
+    packages = forAllSystems (pkgs: import ./nix/packages {inherit pkgs astal ags tapyre-cli;});
   };
 }

@@ -2,11 +2,23 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+
+    tapyre-cli = {
+      url = "github:tapyre/tapyre?dir=tapyre-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    tapyre-astal = {
+      url = "github:tapyre/tapyre?dir=tapyre/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
+    tapyre-cli,
+    tapyre-astal,
     ...
   } @ inputs: let
     systems = [
@@ -25,17 +37,9 @@
   in {
     formatter = forAllSystems (pkgs: pkgs.alejandra);
 
-    devShells = forAllSystems (
-      pkgs: {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            rustc
-            cargo
-          ];
-        };
-      }
-    );
-
-    packages = forAllSystems (pkgs: import ./nix/packages {inherit pkgs;});
+    packages = forAllSystems (pkgs: {
+      tapyre-astal = tapyre-astal.packages.${pkgs.system}.default;
+      tapyre-cli = tapyre-cli.packages.${pkgs.system}.default;
+    });
   };
 }
