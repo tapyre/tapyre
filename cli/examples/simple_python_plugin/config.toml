@@ -1,4 +1,0 @@
-[[plugins]]
-id = "test"
-executable_path = "PATH"
-plugin_type = "Python"
