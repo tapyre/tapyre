@@ -9,21 +9,19 @@ let tapyre: Gtk.Window;
 app.start({
   instanceName: "tapyre",
   css: style,
-  requestHandler(request, res) {
-    const [, argv] = GLib.shell_parse_argv(request);
-    if (!argv) return res("argv parse error");
-
+  requestHandler(argv: string[], response: (response: string) => void) {
+    const [, arg] = argv;
     switch (argv[0]) {
       case "toggle":
         tapyre.visible = !tapyre.visible;
-        return res("ok");
+        return response("ok");
       default:
-        return res("unknown command");
+        return response("unknown command");
     }
   },
   main() {
     tapyre = Tapyre() as Gtk.Window;
     app.add_window(tapyre);
-    tapyre.present();
+    // tapyre.present();
   },
 });
