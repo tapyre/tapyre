@@ -7,6 +7,7 @@ import Gtk from "gi://Gtk?version=4.0";
 let tapyre: Gtk.Window;
 
 app.start({
+  instanceName: "tapyre",
   css: style,
   requestHandler(request, res) {
     const [, argv] = GLib.shell_parse_argv(request);
