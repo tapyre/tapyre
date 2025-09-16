@@ -1,0 +1,7 @@
+llm:
+  provider: "ollama"
+  model: "qwen3:1.7b"
+  host: "http://localhost:11434"
+  temperature: 0.0
+  max_tokens: 512
+  verbose: true
