@@ -1,7 +1,7 @@
 import yaml
 
 class ConfigLoader:
-    def __init__(self, path: str = "../config/config.yaml"):
+    def __init__(self, path: str = "./config/config.yaml"):
         with open(path, "r") as f:
             self._config = yaml.safe_load(f)
 
