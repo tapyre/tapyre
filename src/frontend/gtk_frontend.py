@@ -1,0 +1,84 @@
+import gi
+
+gi.require_version("Gtk", "3.0")
+gi.require_version("GtkLayerShell", "0.1")
+from gi.repository import Gtk, Gdk, GtkLayerShell, Pango
+
+from implementations.plugin_agent import PluginAgent
+from runtime.plugin_loader import PluginLoader
+from runtime.config_loader import ConfigLoader
+from implementations.ollama_llm import OllamaLLM
+import yaml
+
+class MyWindow(Gtk.Window):
+    def __init__(self, agent: PluginAgent):
+        Gtk.Window.__init__(self, title="Simple GTK Frontend")
+        self.set_size_request(1000, 100)
+        self.connect("key-press-event", self.on_key_press)
+
+        self.agent = agent
+
+        GtkLayerShell.init_for_window(self)
+        GtkLayerShell.set_layer(self, GtkLayerShell.Layer.OVERLAY)
+        GtkLayerShell.set_keyboard_mode(self, GtkLayerShell.KeyboardMode.EXCLUSIVE)
+
+        self.box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        self.add(self.box)
+
+        prompt_label = Gtk.Label(label=" > ")
+        font_desc_prompt = Pango.FontDescription("Sans 28")
+        prompt_label.override_font(font_desc_prompt)
+        self.box.pack_start(prompt_label, False, False, 0)
+
+        self.entry = Gtk.Entry()
+        self.entry.connect("activate", self.on_entry_activate)
+        self.box.pack_start(self.entry, True, True, 0)
+
+        font_desc = Pango.FontDescription("Sans 28")
+        self.entry.override_font(font_desc)
+
+    def on_entry_activate(self, entry):
+        text = entry.get_text()
+        print("You entered:", text)
+        Gtk.main_quit()
+        self.agent.ask(text)
+
+    def on_key_press(self, widget, event):
+        if event.keyval == Gdk.KEY_Escape:
+            Gtk.main_quit()
+
+
+def main():
+    config_loader = ConfigLoader()
+    plugin_loader = PluginLoader()
+    
+    with open("config/system.yaml", "r") as f:
+        system_config = yaml.safe_load(f)
+
+    llm = OllamaLLM(
+        model=config_loader.get_llm_model(),
+        host=config_loader.get_llm_host(),
+        temperature=config_loader.get_llm_temperature(),
+        max_tokens=config_loader.get_llm_max_tokens(),
+    )
+
+    plugins = plugin_loader.load()
+    tools = []
+    for plugin in plugins:
+        tools.append(plugin.to_langchain())
+
+    agent = PluginAgent(
+        tools=tools,
+        llm=llm,
+        system_prompt=system_config.get("app_agent"),
+        verbose=config_loader.get_llm_verbose(),
+    )
+
+    win = MyWindow(agent=agent)
+    win.connect("destroy", Gtk.main_quit)
+    win.show_all()
+    Gtk.main()
+
+
+if __name__ == "__main__":
+    main()
