@@ -31,18 +31,22 @@
             uv
             python3
             ollama
+            pkg-config
+            cmake
+            cairo
+            gtk3
+            gobject-introspection
+            wrapGAppsHook
+            gtk-layer-shell
           ];
 
-          #   lib.makeLibraryPath [
-          #     stdenv.cc.cc
-          #     libz
-          #   ];
-          #
-          # NIX_LD = builtins.readFile "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
-          #
-          # shellHook = ''
-          #   export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH"
-          # '';
+          NIX_LD_LIBRARY_PATH = with pkgs;
+            lib.makeLibraryPath [
+            ];
+
+          shellHook = ''
+            export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH"
+          '';
         };
       }
     );
