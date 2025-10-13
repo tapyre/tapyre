@@ -2,13 +2,15 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("GtkLayerShell", "0.1")
-from gi.repository import Gtk, Gdk, GtkLayerShell, Pango
+from gi.repository import Gtk, Gdk
+from gi.repository import GtkLayerShell  # type: ignore
 
 from implementations.plugin_agent import PluginAgent
 from runtime.plugin_loader import PluginLoader
 from runtime.config_loader import ConfigLoader
 from implementations.ollama_llm import OllamaLLM
 import yaml
+
 
 class MyWindow(Gtk.Window):
     def __init__(self, agent: PluginAgent):
@@ -26,16 +28,11 @@ class MyWindow(Gtk.Window):
         self.add(self.box)
 
         prompt_label = Gtk.Label(label=" > ")
-        font_desc_prompt = Pango.FontDescription("Sans 28")
-        prompt_label.override_font(font_desc_prompt)
         self.box.pack_start(prompt_label, False, False, 0)
 
         self.entry = Gtk.Entry()
         self.entry.connect("activate", self.on_entry_activate)
         self.box.pack_start(self.entry, True, True, 0)
-
-        font_desc = Pango.FontDescription("Sans 28")
-        self.entry.override_font(font_desc)
 
     def on_entry_activate(self, entry):
         text = entry.get_text()
@@ -51,7 +48,7 @@ class MyWindow(Gtk.Window):
 def main():
     config_loader = ConfigLoader()
     plugin_loader = PluginLoader()
-    
+
     with open("config/system.yaml", "r") as f:
         system_config = yaml.safe_load(f)
 

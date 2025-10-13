@@ -1,7 +1,6 @@
 [project]
 name = "src"
 version = "0.1.0"
-description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -9,4 +8,9 @@ dependencies = [
     "langchain-community>=0.3.29",
     "langchain-openai>=0.3.33",
     "PyGObject>=3.42.0",
+]
+
+[dependency-groups]
+dev = [
+    "pygobject-stubs>=2.13.0",
 ]
