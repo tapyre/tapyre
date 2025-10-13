@@ -7,23 +7,14 @@ layout {
     }
     tab name="main" {
         pane {
-           command "zsh"
-        }
-    }
-    tab name="gemini" {
-        pane {
-           command "gemini"
-        }
-    }
-    tab name="git" {
-        pane {
-           command "lazygit"
+            command "zsh"
         }
     }
     tab name="ollama" {
         pane {
-           command "ollama"
-           args "serve"
+            command "ollama"
+            args "serve"
         }
     }
 }
+
