@@ -5,10 +5,9 @@ layout {
             plugin location="zellij:compact-bar"
         }
     }
-    tab name="nvim" {
+    tab name="main" {
         pane {
-           command "nvim"
-           args "."
+           command "zsh"
         }
     }
     tab name="gemini" {
