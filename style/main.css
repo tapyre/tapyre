@@ -1,3 +1,45 @@
 * {
-    font-size: 30px;
+    font-family: "Cantarell", sans-serif;
+    font-size: 16px;
+    color: #f8f8f2;
+}
+
+window {
+    background-color: #282a36;
+}
+
+#main-box {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #6272a4;
+}
+
+#chat-history {
+    background-color: #383a59;
+    border: 1px solid #44475a;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#user-input {
+    background-color: #44475a;
+    color: #f8f8f2;
+    border: 1px solid #6272a4;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+button {
+    background-color: #50fa7b;
+    color: #282a36;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #50fa7b;
+    box-shadow: 0 0 10px #50fa7b;
 }
