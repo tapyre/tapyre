@@ -18,6 +18,15 @@ class MyWindow(Gtk.Window):
         self.set_size_request(1000, 100)
         self.connect("key-press-event", self.on_key_press)
 
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_path("style/main.css")
+        screen = Gdk.Screen.get_default()
+        style_context = Gtk.StyleContext()
+        if screen:
+            style_context.add_provider_for_screen(
+                screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
+
         self.agent = agent
 
         GtkLayerShell.init_for_window(self)
@@ -33,6 +42,7 @@ class MyWindow(Gtk.Window):
         self.entry = Gtk.Entry()
         self.entry.connect("activate", self.on_entry_activate)
         self.box.pack_start(self.entry, True, True, 0)
+
 
     def on_entry_activate(self, entry):
         text = entry.get_text()
