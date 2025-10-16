@@ -20,7 +20,7 @@ class ConfigLoader:
     def get_llm_verbose(self) -> bool:
         return self._config.get("llm", {}).get("verbose", False)
     
-    def get_llm_host(self) -> bool:
+    def get_llm_host(self) -> str:
         return self._config.get("llm", {}).get("host", "http://localhost:11434")
 
     def get(self, key: str, default=None):
