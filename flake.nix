@@ -31,8 +31,8 @@
             uv
             python3
             ollama
+            ninja
             pkg-config
-            cmake
             cairo
             gtk3
             gobject-introspection
