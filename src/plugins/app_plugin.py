@@ -69,6 +69,7 @@ class AppPlugin(Plugin):
         return ";".join(sorted(self._build_app_map().keys()))
 
     def run(self, text: str):
+        text = text.strip()
         try:
             exec_cmd = self._find_exec_cmd(text)
             if not exec_cmd:
