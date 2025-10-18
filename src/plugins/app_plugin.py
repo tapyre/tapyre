@@ -4,19 +4,32 @@ import os
 import configparser
 import shlex
 
+
 class AppPlugin(Plugin):
     def __init__(self):
         self.prefix = "launch"
         self.name = "AppLauncher"
-        self.prompt = "Opens a specified application, you got the following apps to choose" + self.get_all_apps() + "."
+        self.prompt = (
+            "Opens a specified application, you got the following apps to choose"
+            + self.get_all_apps()
+            + "."
+        )
 
         self.app_map = self._build_app_map()
 
     def _build_app_map(self):
-        desktop_dirs = [
-            "/usr/share/applications",
-            os.path.expanduser("~/.local/share/applications")
-        ]
+        desktop_dirs = set()
+
+        user_dir = os.path.expanduser("~/.local/share/applications")
+        desktop_dirs.add(user_dir)
+
+        xdg_data_dirs_env = os.environ.get("XDG_DATA_DIRS")
+
+        if xdg_data_dirs_env:
+            for data_dir in xdg_data_dirs_env.split(":"):
+                if data_dir:
+                    app_dir = os.path.join(data_dir, "applications")
+                    desktop_dirs.add(app_dir)
 
         app_map = {}
         for directory in desktop_dirs:
@@ -53,7 +66,7 @@ class AppPlugin(Plugin):
         return exec_cmd.strip()
 
     def get_all_apps(self) -> str:
-        return ";" .join(sorted(self._build_app_map().keys()))
+        return ";".join(sorted(self._build_app_map().keys()))
 
     def run(self, text: str):
         try:
@@ -62,7 +75,9 @@ class AppPlugin(Plugin):
                 return f"App '{text}' wurde nicht gefunden."
 
             parts = shlex.split(exec_cmd)
-            subprocess.Popen(parts, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.Popen(
+                parts, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
             return f"Sucsessfully started '{text}'"
         except Exception as e:
             return f"Error Starting '{text}': {e}"
@@ -80,3 +95,4 @@ class AppPlugin(Plugin):
                 return cmd
 
         return ""
+
