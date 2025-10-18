@@ -8,6 +8,7 @@ dependencies = [
     "langchain-community>=0.3.29",
     "langchain-openai>=0.3.33",
     "PyGObject>=3.42.0",
+    "pyinstaller>=6.16.0",
 ]
 
 [dependency-groups]
