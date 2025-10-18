@@ -4,9 +4,7 @@ Please see the [install guide](docs/install_guide.md) for instructions on how to
 
 ## todo
 
-- raphael
-  - fix packaging
-  - extend ui func
+- fix packaging
 
 ## Star History
 
