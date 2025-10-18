@@ -15,7 +15,7 @@ import threading
 
 class MyWindow(Gtk.Window):
     def __init__(self, agent: PluginAgent):
-        Gtk.Window.__init__(self, title="Simple GTK Frontend")
+        Gtk.Window.__init__(self, title="tapyre")
         self.set_size_request(1000, 100)
         self.connect("key-press-event", self.on_key_press)
 
@@ -38,11 +38,12 @@ class MyWindow(Gtk.Window):
         self.box.set_name("main-box")
         self.add(self.box)
 
-        input_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        input_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
         self.box.pack_start(input_box, False, False, 10)
 
-        prompt_label = Gtk.Label(label=" > ")
-        input_box.pack_start(prompt_label, False, False, 0)
+        self.prompt_label = Gtk.Label(label=" > ")
+        self.prompt_label.set_name("prompt-label")
+        input_box.pack_start(self.prompt_label, False, False, 0)
 
         self.entry = Gtk.Entry()
         self.entry.set_name("user-input")

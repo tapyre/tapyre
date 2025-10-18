@@ -1,45 +1,29 @@
 * {
-    font-family: "Cantarell", sans-serif;
-    font-size: 16px;
-    color: #f8f8f2;
+  font-family: "CaskaydiaCove NF";
+  font-size: 16px;
+  color: #ffffff;
+  font-size: 30px;
 }
 
 window {
-    background-color: #282a36;
+  background-color: #161616;
 }
 
 #main-box {
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #6272a4;
+  padding: 10px;
+  border: 4px solid #303030;
 }
 
-#chat-history {
-    background-color: #383a59;
-    border: 1px solid #44475a;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+#prompt-label {
+  padding: 0px;
+  margin: 0px;
 }
 
 #user-input {
-    background-color: #44475a;
-    color: #f8f8f2;
-    border: 1px solid #6272a4;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-button {
-    background-color: #50fa7b;
-    color: #282a36;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #50fa7b;
-    box-shadow: 0 0 10px #50fa7b;
+  background-color: #161616;
+  color: #ffffff;
+  padding: 5px;
+  margin: 0px;
+  border: none;
+  box-shadow: none;
 }
