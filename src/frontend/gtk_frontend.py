@@ -20,7 +20,7 @@ class MyWindow(Gtk.Window):
         self.connect("key-press-event", self.on_key_press)
 
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_path("style/main.css")
+        css_provider.load_from_path("./src/style/main.css")
         screen = Gdk.Screen.get_default()
         style_context = Gtk.StyleContext()
         if screen:
@@ -66,7 +66,7 @@ def main():
     config_loader = ConfigLoader()
     plugin_loader = PluginLoader()
 
-    with open("config/system.yaml", "r") as f:
+    with open("./src/config/system.yaml", "r") as f:
         system_config = yaml.safe_load(f)
 
     llm = OllamaLLM(

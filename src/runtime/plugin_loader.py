@@ -10,7 +10,7 @@ from abstractions.plugin import Plugin
 class PluginLoader:
     def __init__(self, plugins_dir: str | Path | None = None) -> None:
         if plugins_dir is None:
-            plugins_dir = Path(__file__).parent / ".." / ".." / "plugins"
+            plugins_dir = Path(__file__).parent / ".." / "plugins"
         self.plugins_dir = Path(plugins_dir).resolve()
 
     def load(self) -> List[Plugin]:

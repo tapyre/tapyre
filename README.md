@@ -6,7 +6,6 @@ Please see the [install guide](docs/install_guide.md) for instructions on how to
 
 - raphael
   - fix packaging
-  - fix project structure
   - extend ui func
 
 ## Star History
